@@ -8,15 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Runtime.InteropServices;
 
 namespace FreeSpace
 {
     public partial class Form1 : Form
     {
-        FsProgressBar fsProgress = new FsProgressBar();
-        public override System.Drawing.Color ForeColor { get; set; }
-        private DriveInfo[] allDrives;
+        sbyte progessBarRed = 2;
+        sbyte progessBar4 = 4;
+        private DriveInfo[] allDrives = DriveInfo.GetDrives();
         public Form1()
         {
             InitializeComponent();
@@ -24,51 +24,66 @@ namespace FreeSpace
         private void GetSize()
         {
             var size = SystemInformation.PrimaryMonitorMaximizedWindowSize;
-            var newSize = new Size(size.Width = 300, size.Height = 150);
+            var newSize = new Size(size.Width = 230, size.Height = 170);
             this.MinimumSize = this.MaximumSize = this.Size = newSize;
         }
-        private float GetFreeDiskSpace()
+        private void AddToComboBox()
         {
-            allDrives = DriveInfo.GetDrives();
-            double GB = allDrives[0].AvailableFreeSpace / Math.Pow(1024, 3);
+            foreach (var drive in allDrives)
+            {
+                 comboBoxChoiseDisk.Items.Add(drive);
+            }
+        }
+        private float GetFreeDiskSpace(int index)
+        {
+            double GB = allDrives[index].AvailableFreeSpace / Math.Pow(1024, 3);
             float _cb = (float)GB;
             return _cb;
         }
-        private float GetTotalDiskSpace()
+        private float GetTotalDiskSpace(int index)
         {
-            allDrives = DriveInfo.GetDrives();
-            double GB = allDrives[0].TotalSize / Math.Pow(1024, 3);
+            double GB = allDrives[index].TotalSize / Math.Pow(1024, 3);
             float _cb = (float)GB;
             return _cb;
         }
-        private float GetMaximum()
+        private float GetMaximum(int index)
         {
-            allDrives = DriveInfo.GetDrives();
-            double GB = allDrives[0].TotalSize / Math.Pow(1024, 3);
+            double GB = allDrives[index].TotalSize / Math.Pow(1024, 3);
             float _cb = (float)GB;
             return _cb;
-        }
-        private string GetName()
-        {
-            allDrives = DriveInfo.GetDrives();
-            
-            return allDrives[0].Name;
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            AddToComboBox();
             GetSize();
-            ShowProgressBar();
-            label1.Text = GetFreeDiskSpace().ToString() + " ГБ свободно из " + GetTotalDiskSpace().ToString();
         }
         public void ShowProgressBar()
         {
-            fsProgress.ForeColor = Color.Red;
-            label2.Text = "Диск " + GetName();
+            progressBar1.Show();    
+            progressBar1.Value = 0;
+            int index = comboBoxChoiseDisk.SelectedIndex;
+            progressBar1.ForeColor = Color.Red;
+            labelDiskName.Text = "Диск " + allDrives[index].Name;
             progressBar1.Minimum = 0;
-            float _value = GetTotalDiskSpace() - GetFreeDiskSpace();
-            progressBar1.Maximum = (int)GetMaximum();
+            float _value = GetTotalDiskSpace(index) - GetFreeDiskSpace(index);
+            progressBar1.Maximum = (int)GetMaximum(index);
             progressBar1.Value += (int)_value;
+            if (_value > 300)
+            {
+                ModifyProgressBarColor.SetState(progressBar1, progessBarRed);
+            }
+
         }
-       
+
+        private void comboBoxChoiseDisk_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = comboBoxChoiseDisk.SelectedIndex;
+            ShowProgressBar();
+            labelDiskPlace.Text = GetFreeDiskSpace(index).ToString() + " ГБ свободно из "
+                + GetTotalDiskSpace(index).ToString();
+            float _value = GetTotalDiskSpace(index) - GetFreeDiskSpace(index);
+            MessageBox.Show(_value.ToString());
+            
+        }
     }
 }

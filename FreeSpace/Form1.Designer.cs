@@ -28,44 +28,58 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelDiskPlace = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelDiskName = new System.Windows.Forms.Label();
+            this.comboBoxChoiseDisk = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // label1
+            // labelDiskPlace
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 51);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.labelDiskPlace.AutoSize = true;
+            this.labelDiskPlace.Location = new System.Drawing.Point(13, 125);
+            this.labelDiskPlace.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelDiskPlace.Name = "labelDiskPlace";
+            this.labelDiskPlace.Size = new System.Drawing.Size(0, 16);
+            this.labelDiskPlace.TabIndex = 0;
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(15, 25);
+            this.progressBar1.Location = new System.Drawing.Point(16, 93);
+            this.progressBar1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(181, 23);
+            this.progressBar1.Size = new System.Drawing.Size(241, 28);
             this.progressBar1.TabIndex = 1;
             // 
-            // label2
+            // labelDiskName
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "label2";
+            this.labelDiskName.AutoSize = true;
+            this.labelDiskName.Location = new System.Drawing.Point(13, 73);
+            this.labelDiskName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelDiskName.Name = "labelDiskName";
+            this.labelDiskName.Size = new System.Drawing.Size(0, 16);
+            this.labelDiskName.TabIndex = 2;
+            // 
+            // comboBoxChoiseDisk
+            // 
+            this.comboBoxChoiseDisk.FormattingEnabled = true;
+            this.comboBoxChoiseDisk.Location = new System.Drawing.Point(13, 24);
+            this.comboBoxChoiseDisk.Name = "comboBoxChoiseDisk";
+            this.comboBoxChoiseDisk.Size = new System.Drawing.Size(121, 24);
+            this.comboBoxChoiseDisk.TabIndex = 3;
+            this.comboBoxChoiseDisk.Text = "Выбор диска";
+            this.comboBoxChoiseDisk.SelectedIndexChanged += new System.EventHandler(this.comboBoxChoiseDisk_SelectedIndexChanged);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label2);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Controls.Add(this.comboBoxChoiseDisk);
+            this.Controls.Add(this.labelDiskName);
             this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelDiskPlace);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -76,9 +90,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelDiskPlace;
         private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelDiskName;
+        private System.Windows.Forms.ComboBox comboBoxChoiseDisk;
     }
 }
 
